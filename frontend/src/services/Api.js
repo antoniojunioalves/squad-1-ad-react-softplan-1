@@ -6,7 +6,7 @@ const cache = setupCache({
 });
 
 const API = axios.create({
-  baseURL: "http://localhost:3030",
+  baseURL: "https://central-errors.herokuapp.com/",
   adapter: cache.adapter
 });
 
