@@ -12,11 +12,20 @@ const FormControl = props => (
       onChange={props.onChange}
       {...(props.autoFocus === "true" && { autoFocus: true })}
       name={props.name}
+      {...((props.textInValidated || props.notAutorized) && { isInvalid: true })}
     />
-    <Form.Control.Feedback>{props.goodFeedback}</Form.Control.Feedback>
-    <Form.Control.Feedback type="invalid">
-      {props.badFeedback}
-    </Form.Control.Feedback>
+    { (props.notAutorized) ? 
+      <Form.Control.Feedback type="invalid">
+        Não autorizado! Favor verificar o e-mail e password
+      </Form.Control.Feedback> 
+      : 
+      <>
+        <Form.Control.Feedback>{props.goodFeedback}</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">
+          {props.badFeedback}
+        </Form.Control.Feedback> 
+      </>      
+    }
   </Form.Group>
 );
 

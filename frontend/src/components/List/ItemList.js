@@ -8,14 +8,18 @@ const Item = props => {
   const filteredErrors = useSelector(({ error: { filteredErrors } }) => filteredErrors);
   const dispatch = useDispatch()
 
-  const setSelected = idx => {
-    filteredErrors[idx].selected = !filteredErrors[idx].selected;
+  const setSelected = key => {
+    filteredErrors.forEach(item => {
+      if (item._id === key) {
+        item.selected = !item.selected;
+      };
+    });
     let items = filteredErrors.filter(e => e);
     dispatch(Actions.updateFilteredErrors(items));
   };
 
   const handleChange = () => {
-    setSelected(props.idx);
+    setSelected(props.item._id);
   };
 
   const goToErrorPage = () => {

@@ -50,6 +50,17 @@ const getErrorById = async (id, user) => {
   }
 };
 
+const getUserById = async (id, user) => {
+  let config = getConfig(user);
+  try {
+    const { data } = await API.get(`/users/${id}/detail`, config);
+    return data;
+  } catch (error) {
+    console.log("Erro ao buscar os detalhes do usuario: ", error);
+    return [];
+  }
+};
+
 const deleteError = async (id, remove, user) => {
   let config = getConfig(user);
   try {
@@ -102,6 +113,7 @@ const loginUser = async (email, password, setUserOnStorage, setUserLogedIn) => {
 export {
   getErrors,
   getErrorById,
+  getUserById,
   deleteError,
   archiveError,
   createNewUser,

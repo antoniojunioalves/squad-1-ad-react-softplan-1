@@ -40,7 +40,7 @@ const SimpleFilters = ({ classname }) => {
   };
 
   return (
-    <>
+    <div className="d-flex flex-row">
       <SelectedList
         title="Origem"
         options={["Todas", "Produção", "Homologação", "Dev"]}
@@ -53,7 +53,7 @@ const SimpleFilters = ({ classname }) => {
         handleChange={changeOrderBy}
         classname={classname}
       />
-    </>
+    </div>
   );
 }
 

@@ -12,6 +12,9 @@ const Login = props => {
   const [validated, setValidated] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const [emailValidated, setEmailValidated] = useState("");
+  const [notAutorized, setNotAutorized] = useState(false);
+
   const isAuth = useSelector(({ auth: { isAuth } }) => isAuth);
   const dispatch = useDispatch();
 
@@ -28,7 +31,11 @@ const Login = props => {
     if (
       await loginUser(userEmail, userPassword, SetUserOnStorage, SetUserLogedIn)
     ) {
+      setValidated(true);
       redirectToHome();
+    } else {
+      setValidated(false);
+      setNotAutorized(true);
     }
   };
 
@@ -36,16 +43,20 @@ const Login = props => {
     props.history.push("/");
   };
 
+  const validateEmail = () => {
+    const regexEmail = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/i; //eslint-disable-line
+    setEmailValidated(regexEmail.test(userEmail) ? "VALIDATED" : "INVALIDATED");
+
+    return (regexEmail.test(userEmail));
+  }
+
   const handleSubmit = event => {
     event.preventDefault();
     event.stopPropagation();
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      setValidated(true);
-      return;
-    }
-    setValidated(true);
-    login();
+
+    if (validateEmail()) {
+      login();
+    } 
   };
 
   const handleChange = event => {
@@ -95,6 +106,7 @@ const Login = props => {
                 name="email"
                 goodFeedback="Email válido!"
                 badFeedback="Email inválido!"
+                textInValidated={emailValidated === "INVALIDATED"}
               />
               <FormControl
                 controlId="passwordValidation"
@@ -107,6 +119,7 @@ const Login = props => {
                 name="password"
                 goodFeedback="Senha válida!"
                 badFeedback="Senha inválida!"
+                notAutorized={notAutorized}
               />
             </Form.Row>
             <div className="d-flex justify-content-between align-items-end">

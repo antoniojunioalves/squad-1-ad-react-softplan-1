@@ -69,7 +69,7 @@ const SearchForm = () => {
   };
 
   return (
-    <>
+    <div className="d-flex flex-row">
       <SelectedList
         title="Buscar"
         options={["Todos", "Level", "Descrição", "Origem"]}
@@ -86,7 +86,7 @@ const SearchForm = () => {
       <Button variant="light" className="ml-1" onClick={(e) => handleSubmit(e, filtro)}>
         <FontAwesomeIcon icon={faSearch} />
       </Button>
-    </>
+    </div>
   );
 };
 

@@ -22,13 +22,17 @@ const HeaderList = () => (
       </div>
     </MobileView>
     <BrowserView>
-      <div className="d-flex flex-row align-items-center justify-content-between">
-        <div className="p2 col-example d-flex flex-row">
+      <div className="d-flex flex-column flex-lg-row flex-xl-row align-items-center justify-content-between">
+        <div className="p2 col-example d-flex flex-row mb-3">
           <ArchiveDelete />
         </div>
-        <div className="p2 d-flex flex-row pb-3">
-          <SimpleFilters classname="mr-1"/>
-          <SearchForm />
+        <div className="p2 d-flex flex-column flex-md-row pb-3">
+          <div>
+            <SimpleFilters classname="mr-1 d-flex flex-row mb-1"/>
+          </div>
+          <div>
+            <SearchForm />
+          </div>
         </div>
       </div>
     </BrowserView>
