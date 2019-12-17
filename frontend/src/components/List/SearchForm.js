@@ -45,6 +45,7 @@ const SearchForm = () => {
             return (
               (item.description && item.description.title.match(pattern)) ||
               (item.description && item.description.stacktrace.match(pattern)) ||
+              (item.origin.match(pattern)) ||
               (item.environment.match(pattern)) ||
               (item.level.match(pattern)) ||
               (item.occurrences.toString().match(pattern))

@@ -35,7 +35,7 @@ const ErrorDetails = ({ history, match }) => {
     let data = await getErrorById(match.params.id, user);
     if (data.length === 0)
       history.push("/");
-    data.user = await getUser(data.user && data.user._id)
+    data.user = await getUser(data.lastOccurrence && data.lastOccurrence.user)
     setObjError(data);
     setIsLoading(false);
   };
